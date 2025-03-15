@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    text-align: center;
+    padding: 100px 20px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeIn 1s forwards ease-out;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #222;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Кнопка */
+.btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s 0.5s forwards ease-out;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Навигация */
+nav ul {
+    list-style: none;
+    background: #333;
+    padding: 10px 0;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Преимущества */
+.benefits {
+    background: white;
+    padding: 50px 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 1s 1s forwards ease-out;
+}
+
+.benefits h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.benefits ul {
+    list-style: none;
+    padding: 0;
+}
+
+.benefits li {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+/* Отзывы */
+.reviews-container, .add-review-container {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeIn 0.8s forwards ease-out;
+    margin-bottom: 20px;
+}
+
+.review {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-left: 5px solid #4caf50;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideIn 0.5s forwards ease-out;
+}
+
+.review:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.review h3 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+}
+
+.review p {
+    margin: 0 0 10px;
+    font-size: 1.1em;
+}
+
+.stars {
+    color: #ffcc00;
+    font-size: 1.3em;
+}
+
+/* Футер */
+header, footer {
+            text-align: center;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+/* Анимации */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="program.html">Программы курса</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="reviews.html">Отзывы</a></li>
+                <li><a href="contacts.html">Контакты</a></li>
+            </ul>
+        </nav>    
+        <h1>Отзывы наших учеников</h1>
+        <p>Узнайте, что говорят те, кто уже прошёл наш курс</p>
+    </header>
+
+    <section class="reviews-container" id="reviewsContainer">
+        <div class="review">
+            <h3>Анна П.</h3>
+            <p>«Курс по инвестициям помог мне понять, как работает фондовый рынок. Спасибо за доступную подачу!»</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <div class="review">
+            <h3>Дмитрий С.</h3>
+            <p>«Раньше боялся вкладываться, но теперь у меня есть план и стратегия. Очень доволен результатом!»</p>
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+    </section>
+
+    <section class="add-review-container">
+        <h2>Оставить отзыв</h2>
+        <form id="reviewForm">
+            <label for="name">Ваше имя:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="review">Ваш отзыв:</label>
+            <textarea id="review" name="review" rows="5" required></textarea>
+
+            <label for="rating">Ваша оценка:</label>
+            <select id="rating" name="rating" required>
+                <option value="⭐">1 звезда</option>
+                <option value="⭐⭐">2 звезды</option>
+                <option value="⭐⭐⭐">3 звезды</option>
+                <option value="⭐⭐⭐⭐">4 звезды</option>
+                <option value="⭐⭐⭐⭐⭐" selected>5 звезд</option>
+            </select>
+
+            <button type="submit">Отправить отзыв</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 Инвестиционные курсы. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function loadReviews() {
+        const reviewsContainer = document.getElementById('reviewsContainer');
+        const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+        
+        reviewsContainer.innerHTML = ''; // Очищаем текущие отзывы
+
+        reviews.forEach(review => {
+            const newReview = document.createElement('div');
+            newReview.classList.add('review');
+            newReview.innerHTML = `
+                <h3>${review.name}</h3>
+                <p>«${review.text}»</p>
+                <div class="stars">${review.rating}</div>
+            `;
+            reviewsContainer.appendChild(newReview);
+        });
+    }
+
+    // Загрузить отзывы при первой загрузке страницы
+    window.onload = loadReviews;
+
+    // Обработчик отправки формы
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const reviewText = document.getElementById('review').value.trim();
+        const rating = document.getElementById('rating').value;
+
+        if (!name || !reviewText) {
+            alert('Пожалуйста, заполните все поля.');
+            return;
+        }
+
+        // Получаем существующие отзывы из localStorage
+        const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+        // Добавляем новый отзыв
+        reviews.push({
+            name: name,
+            text: reviewText,
+            rating: rating
+        });
+
+        // Сохраняем обновлённый список отзывов в localStorage
+        localStorage.setItem('reviews', JSON.stringify(reviews));
+
+        // Очищаем форму
+        document.getElementById('reviewForm').reset();
+
+        // Обновляем отображение отзывов
+        loadReviews();
+    });
+    </script>
+</body>
+</html>
