@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"> <!-- Устанавливает кодировку страницы UTF-8, чтобы поддерживать русские символы -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Обеспечивает корректное отображение страницы на мобильных устройствах -->
+    <title>Отзывы</title> <!-- Заголовок страницы, который отображается в браузере -->
+    <link rel="stylesheet" href="style.css"> <!-- Подключение внешнего CSS-файла для дополнительной стилизации страницы -->
+
+    <style>
+    header, footer {
+        text-align: center; /* Выравнивание текста по центру */
+        width: 100%; /* Растягивание на всю ширину экрана */
+        padding: 1px 0; /* Внутренние отступы сверху и снизу */
+    }
+
+    header p {
+        color: white; /* Устанавливаем цвет текста белым для шапки */
+    }
+
+    body {
+        display: flex; /* Используем flexbox для выравнивания контента */
+        justify-content: center; /* Центрируем контент по горизонтали */
+        align-items: center; /* Центрируем контент по вертикали */
+        flex-direction: column; /* Контент выстраивается в колонку */
+        min-height: 100vh; /* Минимальная высота body на весь экран */
+    }
+
+    /* Контейнер для контента на странице */
+    .container {
+        text-align: center; /* Центрируем текст внутри контейнера */
+        padding: 100px 20px; /* Внутренний отступ (сверху и снизу) */
+        opacity: 1; /* Элемент невидим при загрузке */
+        transform: translateY(50px); /* Элемент смещен вниз на 50 пикселей */
+        animation: fadeIn 1s forwards ease-out; /* Анимация появления элемента, длительность 1 секунда */
+    }
+
+    /* Стили для заголовка первого уровня (h1) */
+    h1 {
+        font-size: 2.5em; /* Размер шрифта */
+        color: white; /* Темно-серый цвет */
+    }
+
+    /* Стили для параграфов (p) */
+    p {
+        font-size: 1.2em; /* Размер шрифта для параграфов */
+        margin-bottom: 20px; /* Отступ снизу */
+    }
+
+    /* --- Стили для секции навигации --- */
+    .benefits h2 {
+        font-size: 2em; /* Размер шрифта для заголовка второго уровня */
+        margin-bottom: 30px; /* Отступ снизу */
+    }
+
+    .benefits ul {
+        list-style: none; /* Убираем стандартные маркеры списка */
+        padding: 0; /* Убираем отступы */
+    }
+
+    .benefits li {
+        font-size: 1.2em; /* Размер шрифта для элементов списка */
+        margin-bottom: 15px; /* Отступ снизу */
+    }
+
+    /* --- Стили для отзывов --- */
+
+    /* Контейнеры для отзывов и для добавления отзыва */
+    .reviews-container, .add-review-container {
+        background: white; /* Белый фон */
+        padding: 30px; /* Внутренний отступ */
+        border-radius: 15px; /* Скругление углов */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Тень от элемента */
+        width: 100%; /* Ширина элемента 100% */
+        max-width: 780px; /* Максимальная ширина контейнера */
+        opacity: 0; /* Элемент невидим изначально */
+        transform: translateY(30px); /* Смещен вниз на 30 пикселей */
+        animation: fadeIn 0.8s forwards ease-out; /* Анимация появления */
+        margin-bottom: 40px; /* Отступ снизу */
+    }
+
+    /* Стили для каждого отзыва */
+    .review {
+        background-color: #f1f1f1; /* Светло-серый фон для каждого отзыва */
+        padding: 20px; /* Внутренний отступ */
+        border-left: 10px solid #4caf50; /* Левая граница зелёного цвета */
+        border-right: 10px solid #4caf50; /* Правая граница зелёного цвета */
+        margin-bottom: 20px; /* Отступ снизу */
+        border-radius: 15px; /* Скругление углов отзыва */
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* Плавное изменение при наведении */
+        opacity: 1; /* Отзыв видим */
+        transform: translateY(0); /* Отзывы находятся в стандартном положении */
+    }
+
+    .review:hover {
+        transform: scale(1.05); /* Увеличение размера отзыва при наведении */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2); /* Усиление тени при наведении */
+    }
+
+    /* Заголовок отзыва */
+    .review h3 {
+        margin: 0 0 10px; /* Отступы вокруг заголовка */
+        font-size: 1.5em; /* Размер шрифта */
+    }
+
+    /* Текст отзыва */
+    .review p {
+        font-size: 1.1em; /* Размер шрифта */
+    }
+
+    /* Стили для формы добавления отзыва */
+    .add-review-container form {
+        display: flex; /* Использование flexbox для элементов формы */
+        flex-direction: column; /* Элементы формы располагаются вертикально */
+        gap: 10px; /* Расстояние между элементами формы */
+        align-items: flex-start; /* Выравнивание по левому краю */
+    }
+
+    /* Лейблы формы */
+    .add-review-container label {
+        font-weight: bold; /* Жирный текст для лейблов */
+    }
+
+    /* Стили для полей ввода и кнопки */
+    .add-review-container input,
+    .add-review-container textarea,
+    .add-review-container select {
+        width: 100%; /* Ширина элементов 100% */
+        max-width: 780px; /* Максимальная ширина элементов */
+        padding: 8px; /* Внутренний отступ */
+        border: 1px solid #ccc; /* Рамка серого цвета */
+        border-radius: 5px; /* Скругление углов */
+        font-size: 1em; /* Размер шрифта */
+    }
+
+    /* Стили для кнопки добавления отзыва */
+    .add-review-container button {
+        align-self: flex-start; /* Выравнивание кнопки по левому краю */
+        padding: 10px 20px; /* Внутренний отступ */
+        background-color: #4caf50; /* Зеленый фон */
+        color: white; /* Белый текст */
+        border: none; /* Без рамки */
+        border-radius: 5px; /* Скругление углов */
+        cursor: pointer; /* Курсор в виде руки при наведении */
+        font-size: 1.1em; /* Размер шрифта */
+    }
+
+    /* При наведении на кнопку меняется цвет фона */
+    .add-review-container button:hover {
+        background-color: #45a049; /* Темно-зеленый цвет */
+    }
+
+    /* Стиль для кнопок */
+    button {
+        display: block; /* Блоковый элемент */
+        margin: 0 auto; /* Центрирование кнопки */
+        padding: 10px 20px; /* Внутренний отступ */
+        font-size: 1.2em; /* Размер шрифта */
+        background-color: #4caf50; /* Зеленый фон */
+        color: white; /* Белый текст */
+        border: none; /* Без рамки */
+        border-radius: 5px; /* Скругление углов */
+        cursor: pointer; /* Курсор в виде руки */
+    }
+
+    /* При наведении на кнопку меняется цвет */
+    .add-review-container button:hover {
+        background-color: #45a049; /* Темно-зеленый */
+    }
+
+    /* Контейнер для всего контента */
+    .container {
+        text-align: center; /* Центрирование контента */
+        padding: 50px 20px; /* Отступы */
+        margin-top: 20px; /* Отступ сверху */
+    }
+
+    /* Заголовок второго уровня (h2) */
+    h2 {
+        text-align: center; /* Центрирование текста */
+    }
+
+    /* Стили для футера */
+    footer {
+        text-align: center; /* Центрирование текста */
+        background: black; /* Чёрный фон */
+        color: white; /* Белый текст */
+        padding: 0.01%; /* Минимальные отступы */
+        margin-top: 2px; /* Отступ сверху */
+        opacity: 1; /* Футер скрыт изначально */
+        animation: fadeIn 1s 1.5s forwards ease-out; /* Анимация появления */
+        border-radius: 15px 15px 0 0; /* Скругление верхних углов футера */
+    }
+    </style>
+<body>
+    <!-- Видео фон -->
+    <video autoplay loop muted class="bgvideo" id="bgvideo">
+        <!-- Видео фон, который будет повторяться (loop), автоматически воспроизводиться (autoplay), и без звука (muted) -->
+        <source src="C:\Users\user\Desktop\Сайт\Файлы сайта\istockphoto-1469875556-640_adpp_is-vmake.mp4" type="video/mp4">
+        <!-- Путь к видео файлу с указанием формата mp4 -->
+    </video>
+
+    <header>
+        <nav class="navbar">
+            <ul>
+                <!-- Навигационное меню -->
+                <li><a href="index.html">| Главная |</a></li>
+                <li><a href="program.html">| Программы курса |</a></li>
+                <li><a href="prices.html">| Обучение |</a></li>
+                <li><a href="about.html">| О нас |</a></li>
+                <li><a href="reviews.html">| Отзывы |</a></li>
+                <li><a href="contacts.html">| Контакты |</a></li>
+            </ul>
+        </nav>    
+
+        <h1>Отзывы наших учеников</h1>
+        <!-- Заголовок страницы, отображается как "Отзывы наших учеников" -->
+        <p>Узнайте, что говорят те, кто уже прошёл наш курс</p>
+        <!-- Описание под заголовком, поясняющее, что это за отзывы -->
+    </header>
+<!-- Форма для добавления отзыва -->
+<!-- Контейнер для отзывов -->
+<section class="reviews-container" id="reviewsContainer"></section>
+<section class="add-review-container">
+    <h2>Оставить отзыв</h2>
+    <form id="reviewForm">
+        <label for="name">Ваше имя:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="review">Ваш отзыв:</label>
+        <textarea id="review" name="review" rows="5" required></textarea>
+
+        <label for="rating">Ваша оценка:</label>
+        <select id="rating" name="rating" required>
+            <option value="⭐">1 звезда</option>
+            <option value="⭐⭐">2 звезды</option>
+            <option value="⭐⭐⭐">3 звезды</option>
+            <option value="⭐⭐⭐⭐">4 звезды</option>
+            <option value="⭐⭐⭐⭐⭐" selected>5 звезд</option>
+        </select>
+
+        <button type="submit">Отправить отзыв</button>
+    </form>
+</section>
+  <script>
+    document.addEventListener("DOMContentLoaded", loadReviews);
+
+document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const reviewText = document.getElementById('review').value.trim();
+    const rating = document.getElementById('rating').value;
+
+    if (!name || !reviewText) {
+        alert('Пожалуйста, заполните все поля.');
+        return;
+    }
+
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    reviews.push({ name, text: reviewText, rating });
+
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+
+    document.getElementById('reviewForm').reset();
+    loadReviews();
+});
+
+function loadReviews() {
+    const reviewsContainer = document.getElementById('reviewsContainer');
+    if (!reviewsContainer) return;
+
+    const storedReviews = localStorage.getItem('reviews');
+    const reviews = storedReviews ? JSON.parse(storedReviews) : [];
+
+    reviewsContainer.innerHTML = '';
+
+    reviews.forEach(review => {
+        const newReview = document.createElement('div');
+        newReview.classList.add('review');
+        newReview.innerHTML = `
+            <h3>${review.name}</h3>
+            <p>«${review.text}»</p>
+            <div class="stars">${review.rating}</div>
+        `;
+        reviewsContainer.appendChild(newReview);
+    });
+}
+  </script>
+   
+    <footer>
+        <p>© 2025 Инвестиционные курсы. Все права защищены.</p>
+    </footer>   
+</body>
+</html>
+
