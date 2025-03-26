@@ -1,0 +1,274 @@
+<!DOCTYPE html> <!-- Определяет тип документа как HTML5 -->
+<html lang="ru"> <!-- Открывает HTML-документ с указанием языка "ru" для русского -->
+<head>
+    <meta charset="UTF-8"> <!-- Устанавливает кодировку документа как UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Устанавливает параметры адаптивности для мобильных устройств -->
+    <title>Контакты</title> <!-- Устанавливает заголовок страницы, который отображается в вкладке браузера -->
+    <link rel="stylesheet" href="style.css"> <!-- Подключает внешний файл стилей (style.css) -->
+    <style>
+        
+        header, footer {
+            text-align: center; /* Выравнивание текста по центру */
+            width: 100%; /* Ширина 100% */
+            padding: 1px 0; /* Отступы сверху и снизу */
+        }
+
+        header {
+            margin-top: 20px; /* Отступ сверху для шапки */
+        }
+
+        /* Стили для текста с наложением */
+        .text-overlay {
+            background-color: rgba(47, 186, 119, 0.642); /* Полупрозрачный черный фон */
+            padding: 10px; /* Отступы внутри блока */
+            display: inline-block; /* Блок, занимающий только необходимую ширину */
+            border-radius: 15px; /* Закругленные углы */
+        }
+
+        /* Стили для заголовка (h1) */
+        h1 {
+            font-size: 2.5em; /* Размер шрифта */
+            color: white; /* Белый цвет текста */
+        }
+
+        /* Стили для текста параграфа (p) */
+        p {
+            font-size: 1.2em; /* Размер шрифта */
+            margin-bottom: 20px; /* Отступ снизу */
+            color: white; /* Белый цвет текста */
+        }
+
+        /* Основные стили для страницы */
+        body {
+            display: flex; /* Использование Flexbox для центровки контента */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            flex-direction: column; /* Расположение элементов в колонку */
+            min-height: 100vh; /* Минимальная высота страницы — 100% от высоты окна */
+        }
+
+        /* Стили для формы контактов */
+        .contact-form {
+            background: white; /* Белый фон */
+            padding: 30px; /* Отступы внутри формы */
+            border-radius: 15px; /* Закругленные углы */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Тень */
+            width: 100%; /* Ширина 100% */
+            max-width: 500px; /* Максимальная ширина 500px */
+            text-align: center; /* Выравнивание текста по центру */
+            display: flex; /* Использование Flexbox */
+            flex-direction: column; /* Элементы внутри формы расположены по колонке */
+            align-items: center; /* Центровка элементов формы */
+            opacity: 0; /* Начальная непрозрачность формы */
+            transform: translateY(30px); /* Начальное смещение формы */
+            animation: fadeIn 0.8s forwards ease-out; /* Анимация появления формы */
+        }
+
+        /* Стили для меток формы */
+        label {
+            display: block; /* Блочный элемент */
+            margin-bottom: 8px; /* Отступ снизу */
+            font-weight: bold; /* Жирный шрифт */
+            text-align: center; /* Центрирование текста */
+        }
+
+        /* Стили для инпутов, текстовых областей и кнопок */
+        input, textarea, button {
+            width: 100%; /* Ширина 100% */
+            padding: 10px; /* Отступы внутри элементов */
+            margin-bottom: 20px; /* Отступ снизу */
+            border: 1px solid #ccc; /* Граница серого цвета */
+            border-radius: 5px; /* Закругленные углы */
+            font-size: 1em; /* Размер шрифта */
+            text-align: center; /* Центрирование текста внутри элементов */
+        }
+
+        /* Стили для кнопки отправки формы */
+        button {
+            background-color: #4caf50; /* Зеленый фон */
+            color: white; /* Белый цвет текста */
+            cursor: pointer; /* Указатель при наведении */
+        }
+
+        button:hover {
+            background-color: #45a049; /* Темно-зеленый фон при наведении */
+        }
+
+        /* Стили для уведомлений */
+        .notification {
+            display: none; /* Скрыто по умолчанию */
+            background-color: #4caf50; /* Зеленый фон */
+            color: white; /* Белый цвет текста */
+            padding: 15px; /* Отступы внутри уведомления */
+            border-radius: 5px; /* Закругленные углы */
+            margin-top: 20px; /* Отступ сверху */
+            text-align: center; /* Центрирование текста */
+        }
+
+        /* Стили для навигационной панели */
+        .navbar {
+            position: fixed; /* Фиксированное расположение */
+            top: 0; /* Привязка к верхней части страницы */
+            left: 0; /* Привязка к левой части страницы */
+            width: 100%; /* Ширина 100% */
+            z-index: 1000; /* Выше других элементов */
+            background: rgba(0, 0, 0, 0.9); /* Полупрозрачный черный фон */
+        }
+
+        /* Стили для основного контента с учетом высоты меню */
+        .main-content {
+            padding-top: 60px; /* Отступ сверху для основного контента */
+        }
+
+        /* Стили для индикатора прогресса */
+        .progress-container {
+            width: 60%; /* Оптимальная ширина */
+            max-width: 600px; /* Максимальная ширина */
+            height: 40px; /* Высота */
+            background-color: #333; /* Цвет фона */
+            border-radius: 15px; /* Закругленные углы */
+            overflow: hidden; /* Скрытие лишнего содержимого */
+            position: relative; /* Позиционирование относительно контейнера */
+            margin: 20px auto; /* Центрирование */
+        }
+
+        .progress-bar {
+            width: 5%; /* Начальное значение прогресса */
+            height: 100%; /* Высота */
+            background: linear-gradient(90deg, #4caf50, #2e8b57); /* Градиент для прогресса */
+            transition: width 0.5s ease-in-out; /* Плавная анимация изменения ширины */
+        }
+
+        /* Стили для футера */
+        footer {
+            text-align: center; /* Центрирование текста */
+            background: black; /* Черный фон */
+            color: white; /* Белый цвет текста */
+            padding: 0.01%; /* Очень маленький отступ */
+            margin-top: 117px; /* Отступ сверху */
+            opacity: 0; /* Начальная непрозрачность футера */
+            animation: fadeIn 1s 1.5s forwards ease-out; /* Анимация появления футера */
+            border-radius: 15px 15px 0 0; /* Закругленные углы снизу */
+        }
+    </style>
+</head>
+<body>
+    <!-- Видеофон -->
+    <video autoplay loop muted class="bgvideo" id="bgvideo">
+        <!-- Источник видео (указан путь к видеофайлу) -->
+        <source src="videos/output(compress-video-online.com).mp4" type="video/mp4"></source>
+    </video>
+    
+    <header>
+        <!-- Навигационное меню -->
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html">| Главная |</a></li>
+                <li><a href="program.html">| Программы курса |</a></li>
+                <li><a href="prices.html">| Обучение |</a></li>
+                <li><a href="about.html">| О нас |</a></li>
+                <li><a href="reviews.html">| Отзывы |</a></li>
+                <li><a href="contacts.html">| Контакты |</a></li>
+            </ul>
+        </nav>
+
+        <!-- Текстовый оверлей на фоне -->
+        <div class="text-overlay">
+            <h1>Свяжитесь с нами</h1>
+            <p>Оставьте заявку, и мы вам ответим в ближайшее время!</p>
+        </div>
+
+        <!-- Прогресс-бар для отображения количества заполненных мест -->
+        <div class="progress-bar" id="progress-bar"></div>
+        <div class="progress-text" id="progress-text"></div>     
+    </header>
+
+    <!-- Формы для обратной связи -->
+    <section class="contact-form">
+        <form id="contactForm" action="https://formspree.io/f/xyzeyben" method="POST">
+            <!-- Поле для имени -->
+            <label for="name">Ваше имя:</label>
+            <input type="text" name="name" id="name" required>
+
+            <!-- Поле для email -->
+            <label for="email">Ваш email:</label>
+            <input type="email" name="email" id="email" required> <!-- Добавленный input -->
+
+            <!-- Поле для сообщения -->
+            <label for="message">Ваше сообщение:</label>
+            <textarea name="message" id="message" required></textarea>
+
+            <!-- Кнопка отправки формы -->
+            <button type="submit">Отправить</button>
+        </form>
+
+        <!-- Уведомление об успешной отправке -->
+        <div class="notification" id="notification">Ваша заявка отправлена!</div>
+    </section>
+
+    <!-- Подвал сайта -->
+    <footer>
+        <p>© 2025 Инвестиционные курсы. Все права защищены.</p>
+    </footer>
+
+    <script>
+    // Слушаем событие DOMContentLoaded, чтобы запустить код после загрузки страницы
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("contactForm");
+
+        // Если форма существует
+        if (form) {
+            // Добавляем обработчик на отправку формы
+            form.addEventListener("submit", function(e) {
+                e.preventDefault(); // Отменяем стандартное поведение (перезагрузку страницы)
+
+                // Отправляем данные формы через fetch
+                fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: { "Accept": "application/json" }
+                }).then(response => {
+                    if (response.ok) {
+                        // Если ответ успешен, показываем уведомление
+                        const notification = document.getElementById("notification");
+                        notification.style.display = "block";
+                        form.reset(); // Сбрасываем форму
+                        setTimeout(() => {
+                            notification.style.display = "none"; // Скрываем уведомление через 3 секунды
+                        }, 3000);
+
+                        // Обновляем количество учеников
+                        let studentsCount = localStorage.getItem("studentsCount") || 0;
+                        studentsCount = Math.min(20, Number(studentsCount) + 1); // Лимит 20 человек
+                        localStorage.setItem("studentsCount", studentsCount);
+                        updateProgressBar(studentsCount); // Обновляем прогресс-бар
+
+                        // Перенаправление на главную страницу через 1 секунду
+                        setTimeout(() => {
+                            window.location.href = "index.html";
+                        }, 1000);
+                    } else {
+                        alert("Ошибка при отправке данных.");
+                    }
+                }).catch(() => {
+                    alert("Ошибка. Попробуйте ещё раз.");
+                });
+            });
+        }
+
+        // Функция для отображения прогресс-бара
+        function updateProgressBar(count) {
+            const progressBar = document.getElementById("progress-bar");
+            const progressText = document.getElementById("progress-text");
+
+            let percentage = Math.min((count / 20) * 100, 100); // Прогресс в процентах
+            progressBar.style.width = percentage + "%"; // Устанавливаем ширину прогресс-бара
+            progressText.textContent = count + " / 20"; // Текст внутри прогресс-бара
+        }
+
+        // При загрузке страницы обновляем прогресс-бар
+        let studentsCount = localStorage.getItem("studentsCount") || 0;
+        updateProgressBar(studentsCount);
+    });
+    </script>
+</body>

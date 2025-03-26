@@ -1,0 +1,83 @@
+/* Фоновое видео */
+.bgvideo {
+    position: fixed; /* Фиксируем видео на фоне */
+    right: 0;
+    bottom: 0;
+    min-width: 100%; /* Минимальная ширина во всю страницу */
+    min-height: 100%; /* Минимальная высота во всю страницу */
+    width: auto;
+    height: auto;
+    z-index: -9999; /* Отправляем видео на задний план */
+    border-radius: 15px 15px 0 0; /* Закругляем верхние углы */
+}
+
+/* Навигационная панель */
+nav ul {
+    list-style: none; /* Убираем маркеры у списка */
+    background: black; /* Тёмный фон */
+    padding: 10px 0; /* Внутренние отступы сверху и снизу */
+    text-align: center; /* Выравниваем элементы по центру */
+    margin: 0;
+    width: 100%; /* Панель на всю ширину */
+    border-radius: 15px 15px 0 0; /* Закругляем верхние углы */
+}
+
+/* Элементы списка в навигации */
+nav ul li {
+    display: inline; /* Размещаем элементы списка в одну строку */
+    margin: 0 15px; /* Отступы между элементами */
+}
+
+/* Ссылки в навигации */
+nav ul li a {
+    text-decoration: none; /* Убираем подчеркивание */
+    color: white; /* Белый цвет текста */
+    font-size: 1.1em; /* Увеличиваем размер шрифта */
+}
+
+/* Эффект при наведении на ссылки в навигации */
+nav ul li a:hover {
+    text-decoration: underline; /* Подчеркиваем при наведении */
+}
+
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif; /* Шрифт для всего документа */
+    margin: 0;
+    padding: 0;
+    color: black; /* Основной цвет текста */
+    background-color: #f9f9f9; /* Светлый фон */
+    overflow-x: hidden; /* Отключаем горизонтальную прокрутку */
+    background-size: cover; /* Растягиваем фон */
+}
+
+/* Кнопка */
+.btn {
+    background-color: #4caf50; /* Зелёный цвет фона */
+    color: white; /* Белый текст */
+    padding: 15px 30px; /* Отступы внутри кнопки */
+    text-decoration: none; /* Убираем подчеркивание */
+    border-radius: 10px; /* Закругляем края */
+    font-size: 1.2em; /* Увеличиваем размер шрифта */
+    display: inline-block; /* Делаем кнопку блочно-строчной */
+    opacity: 0; /* Изначально скрыта */
+    transform: translateY(20px); /* Смещаем вниз */
+    animation: fadeIn 1s 0.5s forwards ease-out; /* Анимация появления */
+}
+
+/* Эффект при наведении на кнопку */
+.btn:hover {
+    background-color: hsl(123, 40%, 45%); /* Затемняем цвет */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Полностью скрыто */
+        transform: translateY(50px); /* Смещаем вниз */
+    }
+    to {
+        opacity: 1; /* Полностью видно */
+        transform: translateY(0); /* Возвращаем на место */
+    }
+}
